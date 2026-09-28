@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário e Controles</title>
+</head>
+<body>
+    <main>
+        <h2>Formulário de Reserva</h2>
+        
+        <!-- Formulário com action e method exigidos -->
+        <form action="#" method="POST">
+            
+            <!-- Primeiro Bloco Lógico -->
+            <fieldset>
+                <legend>Dados Pessoais</legend>
+                
+                <!-- 1. Campo tipo text -->
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required>
+                <br><br>
+
+                <!-- 2. Campo tipo email -->
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+                <br><br>
+
+                <!-- 3. Campo tipo tel -->
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+            </fieldset>
+
+            <br> <!-- Quebra de linha apenas para dar um espaço visual -->
+
+            <!-- Segundo Bloco Lógico -->
+            <fieldset>
+                <legend>Detalhes do Pedido</legend>
+
+                <!-- 4. Campo tipo date -->
+                <label for="data_viagem">Data da Viagem:</label>
+                <input type="date" id="data_viagem" name="data_viagem">
+                <br><br>
+
+                <!-- 5. Campo tipo number -->
+                <label for="quantidade">Quantidade de Pessoas:</label>
+                <input type="number" id="quantidade" name="quantidade" min="1" max="10">
+                <br><br>
+
+                <!-- 6. Campo tipo select -->
+                <label for="pacote">Escolha o Pacote:</label>
+                <select id="pacote" name="pacote">
+                    <option value="roraima">Pacote Roraima</option>
+                    <option value="ifrr">Cenário IFRR</option>
+                </select>
+                <br><br>
+
+                <!-- 7. Campo tipo textarea -->
+                <label for="observacoes">Observações (Opcional):</label><br>
+                <textarea id="observacoes" name="observacoes" rows="4" cols="40"></textarea>
+                <br><br>
+
+                <!-- 8. Campo tipo checkbox -->
+                <input type="checkbox" id="termos" name="termos" required>
+                <label for="termos">Concordo com os termos e condições</label>
+            </fieldset>
+
+            <br>
+
+            <!-- Botão de envio explícito -->
+            <button type="submit">Enviar Formulário</button>
+            
+        </form>
+    </main>
+</body>
+</html>
