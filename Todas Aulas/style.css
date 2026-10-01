@@ -1,0 +1,468 @@
+/* VARIÁVEIS - :root guarda cores e medidas reutilizadas com var(--nome) */
+:root {
+    --cafe-escuro: #3b2314;
+    --cafe: #573520;
+    --cafe-claro: #8b5a3c;
+    --creme: #f5e6d3;
+    --fundo: #ece0d1;
+    --branco: #ffffff;
+    --texto: #2b1d14;
+    --destaque: #c8873f;
+    --erro: #b3261e;
+    --raio: 12px;
+    --sombra: 0 4px 14px rgba(59, 35, 20, 0.12);
+}
+
+/* ESTILOS GERAIS */
+
+/* * = todas as tags da página: zera margens e espaçamentos padrão do navegador */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* html = a página inteira: faz a rolagem ser suave ao clicar nos links do menu */
+html {
+    scroll-behavior: smooth;
+}
+
+/* body = o corpo da página: cor de fundo, fonte e cor do texto padrão */
+body {
+    background-color: var(--fundo);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--texto);
+}
+
+/* img = todas as imagens: nunca passam da largura da tela */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* a = todos os links: cor padrão */
+a {
+    color: var(--cafe-claro);
+}
+
+/* h2 = títulos das seções ("Conheça nosso café", "Tabela de Preços"...) */
+h2 {
+    color: var(--cafe);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--destaque);
+    display: inline-block;
+}
+
+/* h3 = subtítulos ("Regras de Visitação", "Horário de funcionamento"...) */
+h3 {
+    color: var(--cafe-claro);
+    margin: 16px 0 8px;
+}
+
+/* p + p = parágrafo que vem logo depois de outro parágrafo: dá um espaço entre eles */
+p + p {
+    margin-top: 8px;
+}
+
+/* CABEÇALHO (<header>) */
+
+/* header = faixa do topo com logo, título e botão */
+header {
+    background: linear-gradient(135deg, var(--cafe-escuro), var(--cafe));
+    color: var(--creme);
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* header img = a logo do café */
+header img {
+    margin: 0 auto 20px;
+    border-radius: var(--raio);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* header h1 = o título principal "Portal de Reservas Dungeon Café" */
+header h1 {
+    color: var(--creme);
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+}
+
+/* header p = a frase "Agende sua visita aos nossos cenários" */
+header p {
+    font-size: 18px;
+    font-style: italic;
+    margin-bottom: 24px;
+}
+
+/* BOTÕES - .botao = link "Reservar agora" / button = botão "Enviar Reserva" */
+.botao,
+button {
+    display: inline-block;
+    background-color: var(--destaque);
+    color: var(--cafe-escuro);
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+/* :hover = quando o mouse passa por cima do botão */
+.botao:hover,
+button:hover {
+    background-color: var(--creme);
+    transform: translateY(-2px);
+}
+
+/* MENU DE NAVEGAÇÃO (<nav>) */
+
+/* nav = a barra do menu: fica presa no topo ao rolar a página */
+nav {
+    background-color: var(--creme);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(59, 35, 20, 0.15);
+}
+
+/* nav ul = a lista do menu: coloca os itens lado a lado e sem bolinhas */
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+}
+
+/* nav ul li a = cada link do menu ("Sobre o Local", "Regras"...) */
+nav ul li a {
+    display: block;
+    color: var(--cafe);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* link do menu com o mouse por cima */
+nav ul li a:hover {
+    background-color: var(--cafe);
+    color: var(--creme);
+}
+
+/* LAYOUT DA PÁGINA */
+
+/* .container = a <div> que envolve o <main> e o <aside>: divide em 2 colunas */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 20px;
+    align-items: start;
+}
+
+/* main section / main article / aside = os blocos de conteúdo viram "cartões" brancos */
+main section,
+main article,
+aside {
+    background-color: var(--branco);
+    padding: 24px;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    margin-bottom: 20px;
+    /* Evita que o menu fixo cubra o título ao clicar nos links */
+    scroll-margin-top: 80px;
+}
+
+/* aside = a barra lateral "Informações adicionais": acompanha a rolagem */
+aside {
+    position: sticky;
+    top: 80px;
+    background-color: var(--creme);
+    border-left: 5px solid var(--destaque);
+}
+
+/* aside h2 = o título da barra lateral, um pouco menor */
+aside h2 {
+    font-size: 1.3rem;
+}
+
+/* SEÇÃO "SOBRE O LOCAL" (#primeira-secao) */
+
+/* figure img = a foto do espaço do café */
+figure img {
+    width: 100%;
+    border-radius: var(--raio);
+}
+
+/* figcaption = a legenda embaixo da foto ("Nossa área de socialização") */
+figcaption {
+    text-align: center;
+    font-style: italic;
+    color: var(--cafe-claro);
+    margin: 8px 0 16px;
+}
+
+/* ARTIGO DE REGRAS (<article>) */
+
+/* article ul = a lista de regras de visitação */
+article ul {
+    margin-top: 12px;
+    padding-left: 20px;
+}
+
+/* article li = cada regra da lista */
+article li {
+    margin-bottom: 6px;
+}
+
+/* article li::marker = a bolinha antes de cada regra */
+article li::marker {
+    color: var(--destaque);
+}
+
+/* TABELA DE PREÇOS (#dados) */
+
+/* .tabela-wrapper = a <div> em volta da tabela: permite rolar para o lado no celular */
+.tabela-wrapper {
+    overflow-x: auto;
+}
+
+/* table = a tabela inteira */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: var(--raio);
+    overflow: hidden;
+}
+
+/* caption = o título da tabela ("Pacotes de café disponíveis") */
+caption {
+    text-align: left;
+    color: var(--cafe-claro);
+    margin-bottom: 8px;
+}
+
+/* th e td = todas as células da tabela (cabeçalho e dados) */
+th,
+td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+/* th = células do cabeçalho (Produto, Quantidade, Preço) */
+th {
+    background-color: var(--cafe);
+    color: var(--creme);
+}
+
+/* tbody tr:nth-child(even) = linhas pares da tabela: cor alternada (efeito zebra) */
+tbody tr:nth-child(even) {
+    background-color: var(--fundo);
+}
+
+/* tbody tr:hover = linha da tabela com o mouse por cima */
+tbody tr:hover {
+    background-color: var(--creme);
+}
+
+/* td:last-child = a última coluna (Preço): fica em negrito */
+td:last-child {
+    font-weight: bold;
+    color: var(--cafe);
+}
+
+/* FORMULÁRIO DE RESERVA (#formulario-reserva) */
+
+/* .aviso = o texto "Campos marcados com * são obrigatórios" */
+.aviso {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+/* .obrigatorio = o asterisco vermelho (*) dos campos obrigatórios */
+.obrigatorio {
+    color: var(--erro);
+}
+
+/* fieldset = as caixas que agrupam os campos ("Dados Pessoais" e "Detalhes do Pedido") */
+fieldset {
+    border: 2px solid var(--creme);
+    border-radius: var(--raio);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* legend = o título de cada fieldset */
+legend {
+    font-weight: bold;
+    color: var(--cafe);
+    padding: 0 8px;
+}
+
+/* .campo = a <div> de cada campo: coloca o label em cima do input */
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+/* .linha = a <div> que deixa "Data da Visita" e "Quantidade" lado a lado */
+.linha {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* label = os nomes dos campos ("Nome Completo", "E-mail"...) */
+label {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+/* input, select, textarea = as caixas de digitar, a lista de pacotes e a caixa de observações */
+input,
+select,
+textarea {
+    font: inherit;
+    padding: 10px 12px;
+    border: 2px solid #d8c4ae;
+    border-radius: 8px;
+    background-color: var(--branco);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* textarea = a caixa de observações: só pode aumentar na altura */
+textarea {
+    resize: vertical;
+}
+
+/* :focus = o campo que está selecionado (onde o usuário está digitando) */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--destaque);
+    box-shadow: 0 0 0 3px rgba(200, 135, 63, 0.3);
+}
+
+/* Destaca em vermelho só depois que o usuário digitou algo inválido */
+input:not(:placeholder-shown):invalid {
+    border-color: var(--erro);
+}
+
+/* small = a dica embaixo do telefone ("Formato: DDD XXXXX-XXXX") */
+small {
+    color: #7a6655;
+    margin-top: 4px;
+}
+
+/* .campo-checkbox = a <div> do "Concordo com os termos": caixinha e texto lado a lado */
+.campo-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* .campo-checkbox input = a caixinha de marcar */
+.campo-checkbox input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--cafe);
+}
+
+/* .campo-checkbox label = o texto "Concordo com os termos e condições" */
+.campo-checkbox label {
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+/* form button = o botão "Enviar Reserva": ocupa a largura toda */
+form button {
+    width: 100%;
+    background-color: var(--cafe);
+    color: var(--creme);
+    font-size: 1.1rem;
+    padding: 14px;
+}
+
+/* botão "Enviar Reserva" com o mouse por cima */
+form button:hover {
+    background-color: var(--cafe-escuro);
+    color: var(--creme);
+}
+
+/* :focus-visible = link ou botão selecionado pela tecla Tab: mostra um contorno */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--destaque);
+    outline-offset: 3px;
+}
+
+/* RODAPÉ (<footer>) */
+
+/* footer = a faixa do final da página com o contato */
+footer {
+    background-color: var(--cafe-escuro);
+    color: var(--creme);
+    text-align: center;
+    padding: 24px 20px;
+    margin-top: 20px;
+}
+
+/* footer a = o link do telefone no rodapé */
+footer a {
+    color: var(--destaque);
+}
+
+/* footer p:last-child = o último parágrafo do rodapé (direitos reservados) */
+footer p:last-child {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* RESPONSIVIDADE - @media = regras que só valem em telas menores */
+
+/* Tablet (até 800px): main e aside ficam um embaixo do outro */
+@media (max-width: 800px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    aside {
+        position: static;
+    }
+}
+
+/* Celular (até 500px): título e logo menores, campos um embaixo do outro */
+@media (max-width: 500px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    header img {
+        width: 180px;
+    }
+
+    .linha {
+        grid-template-columns: 1fr;
+    }
+
+    main section,
+    main article,
+    aside {
+        padding: 16px;
+    }
+}

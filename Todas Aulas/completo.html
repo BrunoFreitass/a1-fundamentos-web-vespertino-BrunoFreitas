@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agende sua visita ao Dungeon Café e reserve seu pacote de café.">
+    <title>Reserva de Pacotes - Dungeon Café</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <header>
+        <img src="img/logo_cafe.jpg" alt="Logo do Dungeon Café" width="250">
+        <!-- Único h1 da página -->
+        <h1>Portal de Reservas Dungeon Café</h1>
+        <p>Agende sua visita aos nossos cenários</p>
+        <a href="#formulario-reserva" class="botao">Reservar agora</a>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#primeira-secao">Sobre o Local</a></li>
+            <li><a href="#artigo-principal">Regras</a></li>
+            <li><a href="#dados">Tabela de Preços</a></li>
+            <li><a href="#formulario-reserva">Fazer Reserva</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <main>
+            <section id="primeira-secao">
+                <h2>Conheça nosso café</h2>
+                <figure>
+                    <img src="img/espaco.jpg" alt="Área interna do Dungeon Café com mesas e decoração temática" width="735" height="497">
+                    <figcaption>Nossa área de socialização</figcaption>
+                </figure>
+                <p>Um espaço temático para tomar um bom café, jogar com os amigos e conhecer gente nova.</p>
+            </section>
+
+            <article id="artigo-principal">
+                <h2>Artigo Informativo</h2>
+                <h3>Regras de Visitação</h3>
+                <p>Leia atentamente as regras antes de preencher o formulário de reserva.</p>
+                <ul>
+                    <li>As reservas devem ser feitas com <strong>48h de antecedência</strong>.</li>
+                    <li>Cada reserva comporta no máximo <strong>10 pessoas</strong>.</li>
+                    <li>Chegue com até 15 minutos de antecedência.</li>
+                    <li>Cuide dos jogos e cenários: eles são de todos.</li>
+                </ul>
+            </article>
+
+            <section id="dados">
+                <h2>Tabela de Preços</h2>
+                <div class="tabela-wrapper">
+                    <table>
+                        <caption>Pacotes de café disponíveis</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Produto</th>
+                                <th scope="col">Quantidade</th>
+                                <th scope="col">Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pacote café 250g</td>
+                                <td>20 xícaras</td>
+                                <td>R$ 25,00</td>
+                            </tr>
+                            <tr>
+                                <td>Pacote café 500g</td>
+                                <td>40 xícaras</td>
+                                <td>R$ 50,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Formulário inserido dentro do main como uma seção -->
+            <section id="formulario-reserva">
+                <h2>Formulário de Reserva</h2>
+                <p class="aviso">Campos marcados com <span class="obrigatorio">*</span> são obrigatórios.</p>
+
+                <form action="#" method="POST">
+
+                    <fieldset>
+                        <legend>Dados Pessoais</legend>
+
+                        <div class="campo">
+                            <label for="nome">Nome Completo <span class="obrigatorio">*</span></label>
+                            <input type="text" id="nome" name="nome" required minlength="3" maxlength="50" autocomplete="name" placeholder="Seu nome">
+                        </div>
+
+                        <div class="campo">
+                            <label for="email">E-mail <span class="obrigatorio">*</span></label>
+                            <input type="email" id="email" name="email" required autocomplete="email" placeholder="voce@exemplo.com">
+                        </div>
+
+                        <div class="campo">
+                            <label for="telefone">Telefone (WhatsApp) <span class="obrigatorio">*</span></label>
+                            <input type="tel" id="telefone" name="telefone" required pattern="[0-9]{2} [0-9]{5}-[0-9]{4}" title="Formato exigido: DDD XXXXX-XXXX (ex: 95 98116-2474)" autocomplete="tel" placeholder="95 98116-2474">
+                            <small>Formato: DDD XXXXX-XXXX</small>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Detalhes do Pedido</legend>
+
+                        <div class="linha">
+                            <div class="campo">
+                                <label for="data_visita">Data da Visita <span class="obrigatorio">*</span></label>
+                                <input type="date" id="data_visita" name="data_visita" required>
+                            </div>
+
+                            <div class="campo">
+                                <label for="quantidade">Quantidade de Pessoas <span class="obrigatorio">*</span></label>
+                                <input type="number" id="quantidade" name="quantidade" required min="1" max="10" value="1">
+                            </div>
+                        </div>
+
+                        <div class="campo">
+                            <label for="pacote">Escolha o Pacote <span class="obrigatorio">*</span></label>
+                            <select id="pacote" name="pacote" required>
+                                <option value="">Selecione uma opção...</option>
+                                <option value="pacote-250g">Pacote 250g (R$ 25,00)</option>
+                                <option value="pacote-500g">Pacote 500g (R$ 50,00)</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="observacoes">Observações (opcional)</label>
+                            <textarea id="observacoes" name="observacoes" rows="4" placeholder="Alguma preferência ou pedido especial?"></textarea>
+                        </div>
+
+                        <div class="campo-checkbox">
+                            <input type="checkbox" id="termos" name="termos" required>
+                            <label for="termos">Concordo com os termos e condições <span class="obrigatorio">*</span></label>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit">Enviar Reserva</button>
+                </form>
+            </section>
+        </main>
+
+        <aside>
+            <h2>Informações adicionais</h2>
+            <p>As reservas devem ser feitas com <strong>48h de antecedência</strong>.</p>
+            <h3>Horário de funcionamento</h3>
+            <p>Terça a domingo, das 14h às 22h.</p>
+            <h3>Dúvidas?</h3>
+            <p>Fale com a gente pelo WhatsApp: <a href="https://wa.me/5595981162474">(95) 98116-2474</a></p>
+        </aside>
+    </div>
+
+    <footer>
+        <p>Contato: <a href="tel:+5595981162474">(95) 98116-2474</a></p>
+        <p>&copy; 2026 Dungeon Café. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
