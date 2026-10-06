@@ -404,6 +404,23 @@ form button:hover {
     color: var(--creme);
 }
 
+/* .resumo = o texto "Valor do pacote: R$ 25,00" que o script.js escreve embaixo da lista */
+.resumo {
+    margin-top: 6px;
+    font-weight: bold;
+    color: var(--cafe);
+}
+
+/* .mensagem-sucesso = a caixa verde que o script.js mostra depois de enviar a reserva */
+.mensagem-sucesso {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background-color: #e3f1e0;
+    color: #1e4d1a;
+    border-left: 5px solid #3c8a33;
+    border-radius: 8px;
+}
+
 /* :focus-visible = link ou botão selecionado pela tecla Tab: mostra um contorno */
 a:focus-visible,
 button:focus-visible {

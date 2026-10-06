@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório 07 — DOM e Eventos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. COMPONENTE MENU MOBILE -->
+    <header class="header">
+        <div class="logo">ITEAM Interativo</div>
+        <button id="btn-menu" class="btn-menu" aria-label="Abrir Menu">☰</button>
+        <nav id="menu-navegacao" class="menu-navegacao">
+            <a href="#">Início</a>
+            <a href="#">Projetos</a>
+            <a href="#">Equipe</a>
+            <a href="#">Contato</a>
+        </nav>
+    </header>
+
+    <!-- 2. COMPONENTE CONTADOR INTERATIVO -->
+    <main class="container">
+        <section class="card-contador">
+            <h2>Contador de Inscrições</h2>
+            <div id="valor-contador" class="display-numero">0</div>
+            
+            <div class="botoes-grupo">
+                <button id="btn-diminuir" class="btn btn-vermelho">-1</button>
+                <button id="btn-zerar" class="btn btn-cinza">Zerar</button>
+                <button id="btn-aumentar" class="btn btn-verde">+1</button>
+            </div>
+            
+            <p id="mensagem-status" class="status-msg">Inicie a contagem.</p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

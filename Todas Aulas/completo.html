@@ -1,163 +1,306 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Codificação de caracteres: permite acentos e ç -->
     <meta charset="UTF-8">
+    <!-- Faz a página se ajustar à largura da tela do celular -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Descrição que aparece no Google embaixo do título -->
     <meta name="description" content="Agende sua visita ao Dungeon Café e reserve seu pacote de café.">
+    <!-- Texto que aparece na aba do navegador -->
     <title>Reserva de Pacotes - Dungeon Café</title>
 
+    <!-- Liga o arquivo de estilos (cores, tamanhos, layout) -->
     <link rel="stylesheet" href="style.css">
 
+<!-- Fim do <head> -->
 </head>
+<!-- <body> = tudo o que aparece na tela -->
 <body>
+    <!-- CABEÇALHO: faixa do topo -->
     <header>
+        <!-- Logo do café; alt descreve a imagem para leitores de tela -->
         <img src="img/logo_cafe.jpg" alt="Logo do Dungeon Café" width="250">
-        <!-- Único h1 da página -->
+        <!-- Único h1 da página: o título principal -->
         <h1>Portal de Reservas Dungeon Café</h1>
+        <!-- Frase de apresentação -->
         <p>Agende sua visita aos nossos cenários</p>
+        <!-- Botão que leva até o formulário (href="#id" pula para a seção com esse id) -->
         <a href="#formulario-reserva" class="botao">Reservar agora</a>
+    <!-- Fim do cabeçalho -->
     </header>
 
+    <!-- MENU DE NAVEGAÇÃO -->
     <nav>
+        <!-- Lista de links do menu -->
         <ul>
+            <!-- Link para a seção "Conheça nosso café" -->
             <li><a href="#primeira-secao">Sobre o Local</a></li>
+            <!-- Link para o artigo de regras -->
             <li><a href="#artigo-principal">Regras</a></li>
+            <!-- Link para a tabela de preços -->
             <li><a href="#dados">Tabela de Preços</a></li>
+            <!-- Link para o formulário -->
             <li><a href="#formulario-reserva">Fazer Reserva</a></li>
+        <!-- Fim da lista -->
         </ul>
+    <!-- Fim do menu -->
     </nav>
 
+    <!-- Caixa que divide a página em 2 colunas: conteúdo (main) e barra lateral (aside) -->
     <div class="container">
+        <!-- <main> = conteúdo principal da página -->
         <main>
+            <!-- SEÇÃO 1: apresentação do café -->
             <section id="primeira-secao">
+                <!-- Título da seção -->
                 <h2>Conheça nosso café</h2>
+                <!-- <figure> agrupa a imagem com a sua legenda -->
                 <figure>
+                    <!-- Foto do espaço interno -->
                     <img src="img/espaco.jpg" alt="Área interna do Dungeon Café com mesas e decoração temática" width="735" height="497">
+                    <!-- Legenda da foto -->
                     <figcaption>Nossa área de socialização</figcaption>
+                <!-- Fim da figura -->
                 </figure>
+                <!-- Texto de apresentação -->
                 <p>Um espaço temático para tomar um bom café, jogar com os amigos e conhecer gente nova.</p>
+            <!-- Fim da seção 1 -->
             </section>
 
+            <!-- ARTIGO: regras de visitação -->
             <article id="artigo-principal">
+                <!-- Título do artigo -->
                 <h2>Artigo Informativo</h2>
+                <!-- Subtítulo -->
                 <h3>Regras de Visitação</h3>
+                <!-- Texto de orientação -->
                 <p>Leia atentamente as regras antes de preencher o formulário de reserva.</p>
+                <!-- Lista de regras com marcadores -->
                 <ul>
+                    <!-- Regra 1 (<strong> = texto importante, em negrito) -->
                     <li>As reservas devem ser feitas com <strong>48h de antecedência</strong>.</li>
+                    <!-- Regra 2 -->
                     <li>Cada reserva comporta no máximo <strong>10 pessoas</strong>.</li>
+                    <!-- Regra 3 -->
                     <li>Chegue com até 15 minutos de antecedência.</li>
+                    <!-- Regra 4 -->
                     <li>Cuide dos jogos e cenários: eles são de todos.</li>
+                <!-- Fim da lista -->
                 </ul>
+            <!-- Fim do artigo -->
             </article>
 
+            <!-- SEÇÃO 2: tabela de preços -->
             <section id="dados">
+                <!-- Título da seção -->
                 <h2>Tabela de Preços</h2>
+                <!-- Caixa que deixa a tabela rolar para o lado no celular -->
                 <div class="tabela-wrapper">
+                    <!-- Início da tabela -->
                     <table>
+                        <!-- Título da tabela -->
                         <caption>Pacotes de café disponíveis</caption>
+                        <!-- <thead> = cabeçalho da tabela -->
                         <thead>
+                            <!-- <tr> = uma linha da tabela -->
                             <tr>
+                                <!-- <th> = célula de título; scope="col" diz que é título da coluna -->
                                 <th scope="col">Produto</th>
+                                <!-- Título da coluna de quantidade -->
                                 <th scope="col">Quantidade</th>
+                                <!-- Título da coluna de preço -->
                                 <th scope="col">Preço</th>
+                            <!-- Fim da linha -->
                             </tr>
+                        <!-- Fim do cabeçalho -->
                         </thead>
+                        <!-- <tbody> = corpo da tabela, com os dados -->
                         <tbody>
+                            <!-- Linha do pacote de 250g -->
                             <tr>
+                                <!-- <td> = célula de dado: nome do produto -->
                                 <td>Pacote café 250g</td>
+                                <!-- Quantidade de xícaras -->
                                 <td>20 xícaras</td>
+                                <!-- Preço -->
                                 <td>R$ 25,00</td>
+                            <!-- Fim da linha -->
                             </tr>
+                            <!-- Linha do pacote de 500g -->
                             <tr>
+                                <!-- Nome do produto -->
                                 <td>Pacote café 500g</td>
+                                <!-- Quantidade de xícaras -->
                                 <td>40 xícaras</td>
+                                <!-- Preço -->
                                 <td>R$ 50,00</td>
+                            <!-- Fim da linha -->
                             </tr>
+                        <!-- Fim do corpo da tabela -->
                         </tbody>
+                    <!-- Fim da tabela -->
                     </table>
+                <!-- Fim da caixa da tabela -->
                 </div>
+            <!-- Fim da seção 2 -->
             </section>
 
-            <!-- Formulário inserido dentro do main como uma seção -->
+            <!-- SEÇÃO 3: formulário de reserva (dentro do main) -->
             <section id="formulario-reserva">
+                <!-- Título da seção -->
                 <h2>Formulário de Reserva</h2>
+                <!-- Aviso sobre os campos obrigatórios; o <span> pinta o * de vermelho -->
                 <p class="aviso">Campos marcados com <span class="obrigatorio">*</span> são obrigatórios.</p>
 
-                <form action="#" method="POST">
+                <!-- Início do formulário; id="form-reserva" é usado pelo script.js -->
+                <form id="form-reserva" action="#" method="POST">
 
+                    <!-- <fieldset> agrupa campos relacionados -->
                     <fieldset>
+                        <!-- Título do grupo -->
                         <legend>Dados Pessoais</legend>
 
+                        <!-- Caixa do campo "Nome" -->
                         <div class="campo">
+                            <!-- Rótulo; for="nome" liga o texto ao input com id="nome" -->
                             <label for="nome">Nome Completo <span class="obrigatorio">*</span></label>
+                            <!-- Caixa de texto: obrigatória, entre 3 e 50 letras -->
                             <input type="text" id="nome" name="nome" required minlength="3" maxlength="50" autocomplete="name" placeholder="Seu nome">
+                        <!-- Fim do campo -->
                         </div>
 
+                        <!-- Caixa do campo "E-mail" -->
                         <div class="campo">
+                            <!-- Rótulo do e-mail -->
                             <label for="email">E-mail <span class="obrigatorio">*</span></label>
+                            <!-- type="email" faz o navegador conferir se tem @ e domínio -->
                             <input type="email" id="email" name="email" required autocomplete="email" placeholder="voce@exemplo.com">
+                        <!-- Fim do campo -->
                         </div>
 
+                        <!-- Caixa do campo "Telefone" -->
                         <div class="campo">
+                            <!-- Rótulo do telefone -->
                             <label for="telefone">Telefone (WhatsApp) <span class="obrigatorio">*</span></label>
+                            <!-- pattern = formato exigido; o script.js coloca o espaço e o hífen sozinho -->
                             <input type="tel" id="telefone" name="telefone" required pattern="[0-9]{2} [0-9]{5}-[0-9]{4}" title="Formato exigido: DDD XXXXX-XXXX (ex: 95 98116-2474)" autocomplete="tel" placeholder="95 98116-2474">
+                            <!-- Dica de formato embaixo do campo -->
                             <small>Formato: DDD XXXXX-XXXX</small>
+                        <!-- Fim do campo -->
                         </div>
+                    <!-- Fim do grupo "Dados Pessoais" -->
                     </fieldset>
 
+                    <!-- Segundo grupo de campos -->
                     <fieldset>
+                        <!-- Título do grupo -->
                         <legend>Detalhes do Pedido</legend>
 
+                        <!-- Caixa que coloca data e quantidade lado a lado -->
                         <div class="linha">
+                            <!-- Caixa do campo "Data" -->
                             <div class="campo">
+                                <!-- Rótulo da data -->
                                 <label for="data_visita">Data da Visita <span class="obrigatorio">*</span></label>
+                                <!-- Calendário; o script.js bloqueia datas com menos de 48h -->
                                 <input type="date" id="data_visita" name="data_visita" required>
+                            <!-- Fim do campo -->
                             </div>
 
+                            <!-- Caixa do campo "Quantidade" -->
                             <div class="campo">
+                                <!-- Rótulo da quantidade -->
                                 <label for="quantidade">Quantidade de Pessoas <span class="obrigatorio">*</span></label>
+                                <!-- Número de 1 a 10, começando em 1 -->
                                 <input type="number" id="quantidade" name="quantidade" required min="1" max="10" value="1">
+                            <!-- Fim do campo -->
                             </div>
+                        <!-- Fim da linha -->
                         </div>
 
+                        <!-- Caixa do campo "Pacote" -->
                         <div class="campo">
+                            <!-- Rótulo do pacote -->
                             <label for="pacote">Escolha o Pacote <span class="obrigatorio">*</span></label>
+                            <!-- <select> = lista de opções -->
                             <select id="pacote" name="pacote" required>
+                                <!-- Opção vazia: obriga a pessoa a escolher uma das outras -->
                                 <option value="">Selecione uma opção...</option>
+                                <!-- Opção do pacote de 250g -->
                                 <option value="pacote-250g">Pacote 250g (R$ 25,00)</option>
+                                <!-- Opção do pacote de 500g -->
                                 <option value="pacote-500g">Pacote 500g (R$ 50,00)</option>
+                            <!-- Fim da lista -->
                             </select>
+                            <!-- Parágrafo vazio: o script.js escreve aqui o preço do pacote escolhido -->
+                            <p id="resumo-pacote" class="resumo" aria-live="polite"></p>
+                        <!-- Fim do campo -->
                         </div>
 
+                        <!-- Caixa do campo "Observações" -->
                         <div class="campo">
+                            <!-- Rótulo das observações -->
                             <label for="observacoes">Observações (opcional)</label>
+                            <!-- <textarea> = caixa de texto com várias linhas -->
                             <textarea id="observacoes" name="observacoes" rows="4" placeholder="Alguma preferência ou pedido especial?"></textarea>
+                        <!-- Fim do campo -->
                         </div>
 
+                        <!-- Caixa da caixinha de marcar -->
                         <div class="campo-checkbox">
+                            <!-- Caixinha obrigatória: precisa estar marcada para enviar -->
                             <input type="checkbox" id="termos" name="termos" required>
+                            <!-- Texto da caixinha -->
                             <label for="termos">Concordo com os termos e condições <span class="obrigatorio">*</span></label>
+                        <!-- Fim do campo -->
                         </div>
+                    <!-- Fim do grupo "Detalhes do Pedido" -->
                     </fieldset>
 
+                    <!-- Botão que envia o formulário (dispara o "submit" no script.js) -->
                     <button type="submit">Enviar Reserva</button>
+                <!-- Fim do formulário -->
                 </form>
+
+                <!-- Mensagem de sucesso: começa escondida (hidden) e o script.js mostra depois do envio -->
+                <p id="mensagem-sucesso" class="mensagem-sucesso" role="status" hidden></p>
+            <!-- Fim da seção 3 -->
             </section>
+        <!-- Fim do conteúdo principal -->
         </main>
 
+        <!-- BARRA LATERAL: informações extras -->
         <aside>
+            <!-- Título da barra lateral -->
             <h2>Informações adicionais</h2>
+            <!-- Lembrete da regra de 48h -->
             <p>As reservas devem ser feitas com <strong>48h de antecedência</strong>.</p>
+            <!-- Subtítulo -->
             <h3>Horário de funcionamento</h3>
+            <!-- Dias e horários -->
             <p>Terça a domingo, das 14h às 22h.</p>
+            <!-- Subtítulo -->
             <h3>Dúvidas?</h3>
+            <!-- Link que abre conversa no WhatsApp -->
             <p>Fale com a gente pelo WhatsApp: <a href="https://wa.me/5595981162474">(95) 98116-2474</a></p>
+        <!-- Fim da barra lateral -->
         </aside>
+    <!-- Fim do container de 2 colunas -->
     </div>
 
+    <!-- RODAPÉ -->
     <footer>
+        <!-- Link "tel:" abre o discador no celular -->
         <p>Contato: <a href="tel:+5595981162474">(95) 98116-2474</a></p>
+        <!-- Direitos autorais (&copy; = símbolo ©) -->
         <p>&copy; 2026 Dungeon Café. Todos os direitos reservados.</p>
+    <!-- Fim do rodapé -->
     </footer>
+
+    <!-- Liga o arquivo JavaScript; defer = só roda depois que o HTML todo carregou -->
+    <script src="script.js" defer></script>
+<!-- Fim do body -->
 </body>
+<!-- Fim da página -->
 </html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluxo do Dungeon Café</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: coluna única de leitura; fluxograma em destaque, depois tabelas de entradas, saídas e funções */
+body { margin: 0; }
+.voltar { font: 600 0.9rem var(--f-mono); color: var(--accent); text-decoration: none; }
+.voltar:hover { text-decoration: underline; }
+:root {
+  --bg: #f6f5f3;
+  --surface: #ffffff;
+  --fg: #231c17;
+  --muted: #6b6159;
+  --line: #e2ddd7;
+  --accent: #8a4b1f;       /* torra de café */
+  --accent-soft: #f3e7dc;
+  --ok: #2f6b3f;
+  --warn: #9a3b2b;
+  --code-bg: #efeae4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17130f; --surface: #211b16; --fg: #f1ebe5; --muted: #b3a89e; --line: #3a3029;
+    --accent: #e0a172; --accent-soft: #33261c; --ok: #7fc28f; --warn: #ec8f7d; --code-bg: #2b231d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17130f; --surface: #211b16; --fg: #f1ebe5; --muted: #b3a89e; --line: #3a3029;
+  --accent: #e0a172; --accent-soft: #33261c; --ok: #7fc28f; --warn: #ec8f7d; --code-bg: #2b231d;
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--fg); font: 400 17px/1.6 var(--f-body); }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 48px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.6rem; font-weight: 800; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+code { font-family: var(--f-mono); font-size: 0.86em; background: var(--code-bg); padding: 1px 6px; border-radius: 4px; }
+.eyebrow { font: 600 0.78rem var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+section { display: grid; gap: 16px; min-width: 0; }
+.intro { display: grid; gap: 14px; }
+.lead { font-size: 1.15rem; color: var(--muted); }
+
+/* Os três arquivos */
+.files { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.file { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 16px; display: grid; gap: 6px; align-content: start; }
+.file .name { font: 600 0.95rem var(--f-mono); color: var(--accent); }
+.file p { color: var(--muted); font-size: 0.95rem; }
+
+/* Fluxograma */
+.diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; overflow-x: auto; }
+.diagram pre.mermaid { margin: 0; background: transparent; display: flex; justify-content: center; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 0.9rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { width: 14px; height: 14px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
+
+/* Tabelas */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 600 0.75rem var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: var(--accent-soft); }
+tr:last-child td { border-bottom: 0; }
+.who { font: 600 0.75rem var(--f-mono); padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.who.nav { background: var(--accent-soft); color: var(--accent); }
+.who.js { background: var(--code-bg); color: var(--fg); }
+.who.none { color: var(--muted); border: 1px dashed var(--line); }
+
+/* Funções: evento -> função -> resultado */
+.steps { display: grid; gap: 10px; }
+.step { display: grid; grid-template-columns: 170px 210px 1fr; gap: 16px; align-items: start; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.step > div { min-width: 0; }
+.step .k { font: 600 0.7rem var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+.step .fn { font-family: var(--f-mono); font-weight: 600; color: var(--accent); word-break: break-word; }
+@media (max-width: 720px) { .step { grid-template-columns: 1fr; gap: 8px; } }
+
+/* Saídas */
+.outs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.out { padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); display: grid; gap: 6px; align-content: start; }
+.out .where { font: 600 0.8rem var(--f-mono); color: var(--ok); }
+.out p { font-size: 0.95rem; }
+
+.note { border-left: 3px solid var(--warn); padding: 12px 16px; background: var(--surface); border-radius: 0 8px 8px 0; display: grid; gap: 6px; }
+.note strong { color: var(--warn); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="intro">
+    <a class="voltar" href="completo.html">&larr; Voltar para o site</a>
+    <span class="eyebrow">Todas Aulas / completo.html</span>
+    <h1>Fluxo do Dungeon Café</h1>
+    <p class="lead">Como o Portal de Reservas funciona do momento em que a página abre até a mensagem de "reserva recebida": o que o visitante digita, o que o navegador confere, o que o JavaScript faz e o que aparece na tela.</p>
+  </header>
+
+  <section>
+    <span class="eyebrow">Peças do site</span>
+    <h2>Três arquivos, três papéis</h2>
+    <div class="files">
+      <div class="file">
+        <span class="name">completo.html</span>
+        <h3>Estrutura</h3>
+        <p>Cabeçalho, menu, seção "Conheça nosso café", regras, tabela de preços, formulário, barra lateral e rodapé.</p>
+      </div>
+      <div class="file">
+        <span class="name">style.css</span>
+        <h3>Aparência</h3>
+        <p>Cores, fontes, layout em duas colunas (main + aside) e ajustes para celular.</p>
+      </div>
+      <div class="file">
+        <span class="name">script.js</span>
+        <h3>Comportamento</h3>
+        <p>Data mínima de 48h, máscara do telefone, preço do pacote e mensagem de sucesso.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Visão geral</span>
+    <h2>Fluxograma de uso</h2>
+    <p>Siga de cima para baixo. O losango "O que o visitante faz?" é o ponto em que a página fica esperando uma ação.</p>
+    <div class="diagram">
+<pre class="mermaid">
+flowchart TD
+  A(["Visitante abre completo.html"]) --> B["Navegador monta a página<br/>HTML + style.css + imagens"]
+  B --> C["script.js roda (defer)"]
+  C --> D["definirDataMinima()<br/>calendário só aceita hoje + 2 dias"]
+  D --> E["Liga 3 eventos:<br/>input · change · submit"]
+  E --> F{"O que o visitante faz?"}
+
+  F -->|"Clica no menu ou<br/>em Reservar agora"| G["Página rola até a seção<br/>(link âncora)"]
+  G --> F
+
+  F -->|"Digita o telefone"| H["evento input<br/>formatarTelefone()"]
+  H --> H2["Campo vira 95 98116-2474"]
+  H2 --> F
+
+  F -->|"Escolhe um pacote"| I["evento change<br/>atualizarResumo()"]
+  I --> I2["Aparece: Valor do pacote: R$ 25,00"]
+  I2 --> F
+
+  F -->|"Clica em Enviar Reserva"| J{"Navegador confere os campos<br/>required · pattern · min · max"}
+  J -->|"Algum campo inválido"| K["Envio bloqueado<br/>balão de erro no campo"]
+  K --> F
+  J -->|"Tudo válido"| L["evento submit<br/>enviarReserva()"]
+  L --> M["preventDefault()<br/>página não recarrega"]
+  M --> N["Monta a frase com nome,<br/>pessoas e data dd/mm/aaaa"]
+  N --> O(["Mensagem de sucesso aparece"])
+  O --> P["Formulário é limpo, resumo apagado<br/>e a tela rola até a mensagem"]
+
+  F -->|"Clica no WhatsApp<br/>ou no telefone"| Q(["Sai do site:<br/>wa.me ou discador"])
+
+  classDef js fill:#f3e7dc,stroke:#8a4b1f,color:#231c17
+  classDef nav fill:#e6efe8,stroke:#2f6b3f,color:#1b2a1f
+  classDef err fill:#f6e1dc,stroke:#9a3b2b,color:#2a1612
+  class C,D,E,H,I,L,M,N js
+  class J nav
+  class K err
+</pre>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:#f3e7dc;border-color:#8a4b1f"></i>Feito pelo script.js</span>
+      <span><i class="sw" style="background:#e6efe8;border-color:#2f6b3f"></i>Validação do próprio navegador</span>
+      <span><i class="sw" style="background:#f6e1dc;border-color:#9a3b2b"></i>Erro / bloqueio</span>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Entradas</span>
+    <h2>O que o visitante preenche</h2>
+    <p>Quase toda a validação é feita pelos atributos do HTML. O script só cuida da data mínima e da máscara do telefone.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Campo</th><th>Tipo</th><th>Regra</th><th>Quem confere</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Nome Completo</td><td><code>text</code></td><td>Obrigatório, de 3 a 50 caracteres</td><td><span class="who nav">navegador</span></td></tr>
+          <tr><td>E-mail</td><td><code>email</code></td><td>Obrigatório, precisa ter @ e domínio</td><td><span class="who nav">navegador</span></td></tr>
+          <tr><td>Telefone (WhatsApp)</td><td><code>tel</code></td><td>Obrigatório, formato <code>95 98116-2474</code>; o script insere o espaço e o hífen</td><td><span class="who nav">navegador</span> <span class="who js">script.js</span></td></tr>
+          <tr><td>Data da Visita</td><td><code>date</code></td><td>Obrigatório, a partir de hoje + 2 dias (regra das 48h)</td><td><span class="who nav">navegador</span> <span class="who js">script.js</span></td></tr>
+          <tr><td>Quantidade de Pessoas</td><td><code>number</code></td><td>Obrigatório, de 1 a 10 (começa em 1)</td><td><span class="who nav">navegador</span></td></tr>
+          <tr><td>Escolha o Pacote</td><td><code>select</code></td><td>Obrigatório: 250g (R$ 25,00) ou 500g (R$ 50,00)</td><td><span class="who nav">navegador</span></td></tr>
+          <tr><td>Observações</td><td><code>textarea</code></td><td>Opcional</td><td><span class="who none">ninguém</span></td></tr>
+          <tr><td>Termos e condições</td><td><code>checkbox</code></td><td>Precisa estar marcado</td><td><span class="who nav">navegador</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Processamento</span>
+    <h2>Evento, função e resultado</h2>
+    <p>No fim do <code>script.js</code>, cada <code>addEventListener</code> diz: "quando acontecer X, rode a função Y".</p>
+    <div class="steps">
+      <div class="step">
+        <div><span class="k">Quando</span>A página abre</div>
+        <div><span class="k">Função</span><span class="fn">definirDataMinima()</span></div>
+        <div><span class="k">Resultado</span>Calcula hoje + 2 dias e grava em <code>data_visita.min</code> no formato AAAA-MM-DD. Datas anteriores ficam bloqueadas no calendário.</div>
+      </div>
+      <div class="step">
+        <div><span class="k">Quando</span><code>input</code> no telefone (cada tecla)</div>
+        <div><span class="k">Função</span><span class="fn">formatarTelefone()</span></div>
+        <div><span class="k">Resultado</span>Remove o que não é número, limita a 11 dígitos e remonta como <code>DD XXXXX-XXXX</code>.</div>
+      </div>
+      <div class="step">
+        <div><span class="k">Quando</span><code>change</code> no pacote</div>
+        <div><span class="k">Função</span><span class="fn">atualizarResumo()</span></div>
+        <div><span class="k">Resultado</span>Busca o preço no objeto <code>precos</code> e escreve "Valor do pacote: R$ 25,00" em <code>#resumo-pacote</code>. Se voltar para "Selecione…", apaga o texto.</div>
+      </div>
+      <div class="step">
+        <div><span class="k">Quando</span><code>submit</code> no formulário (só se tudo for válido)</div>
+        <div><span class="k">Função</span><span class="fn">enviarReserva(evento)</span></div>
+        <div><span class="k">Resultado</span>Impede o recarregamento, monta a frase de agradecimento, mostra <code>#mensagem-sucesso</code>, limpa o formulário e rola até a mensagem.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Saídas</span>
+    <h2>O que aparece para o visitante</h2>
+    <div class="outs">
+      <div class="out">
+        <span class="where">campo telefone</span>
+        <p>Número formatado enquanto digita: <code>95 98116-2474</code>.</p>
+      </div>
+      <div class="out">
+        <span class="where">#resumo-pacote</span>
+        <p>Preço do pacote escolhido, em reais.</p>
+      </div>
+      <div class="out">
+        <span class="where">balão do navegador</span>
+        <p>Aviso no primeiro campo inválido quando o envio é bloqueado.</p>
+      </div>
+      <div class="out">
+        <span class="where">#mensagem-sucesso</span>
+        <p>"Obrigado, Ana! Sua reserva para 4 pessoa(s) em 05/10/2026 foi recebida. Entraremos em contato pelo WhatsApp."</p>
+      </div>
+      <div class="out">
+        <span class="where">formulário</span>
+        <p>Todos os campos voltam ao valor inicial depois do envio.</p>
+      </div>
+      <div class="out">
+        <span class="where">links externos</span>
+        <p>WhatsApp (<code>wa.me</code>) na barra lateral e telefone (<code>tel:</code>) no rodapé.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="note">
+      <strong>Os dados não saem do navegador</strong>
+      <p>Não existe servidor: <code>preventDefault()</code> cancela o envio e nada é salvo. A mensagem de sucesso usa só nome, quantidade e data. E-mail, telefone, pacote e observações são validados, mas não vão para lugar nenhum. Para virar uma reserva de verdade, seria preciso mandar esses dados para um back-end ou para o WhatsApp.</p>
+    </div>
+  </section>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  // Desenha o fluxograma; usa tema escuro se o sistema estiver no modo escuro
+  const escuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  mermaid.initialize({ startOnLoad: true, theme: escuro ? "dark" : "neutral", securityLevel: "strict" });
+</script>
+</body>
+</html>
